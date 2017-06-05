@@ -27,11 +27,11 @@ public class GenericsByMethods {
 		intList.add(2);
 		intList.add(3);
 		
-		Person minPerson = (Person) min(list,new PersonComparator());
+		Person minPerson = min(list,new PersonComparator());
 		
 		System.out.println(minPerson.age + "     " + minPerson.name);
 		
-		Integer minInteger = (Integer) min(intList,new Comparator(){
+		Integer minInteger = min(intList,new Comparator(){
 			@Override
 			public int compare(Object o1, Object o2) {
 				// TODO Auto-generated method stub
@@ -42,9 +42,9 @@ public class GenericsByMethods {
 		System.out.println(minInteger);
 	}
 	
-	public static Object min(List list,Comparator comparator){
-		Object lowest = list.get(0);
-		for(Object temp:list){
+	public static <T> T min(List<T> list,Comparator comparator){
+		T lowest = list.get(0);
+		for(T temp:list){
 			if(comparator.compare(temp, lowest) < 0){
 				lowest = temp;
 			}
