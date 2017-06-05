@@ -27,22 +27,35 @@ public class GenericsByMethods {
 		intList.add(2);
 		intList.add(3);
 		
-		Person minPerson = min(list,new PersonComparator());
+		Person minPerson = (Person) min(list,new PersonComparator());
 		
 		System.out.println(minPerson.age + "     " + minPerson.name);
 		
-		Integer minInteger = min(intList,new Comparator(){
+		Integer minInteger = (Integer) min(intList,new Comparator(){
 			@Override
 			public int compare(Object o1, Object o2) {
 				// TODO Auto-generated method stub
 				return 0;
 			}
 		});
+		
+		//This shows the type unsafe nature of methods made with object param 
+		Integer minInteger2 = (Integer) min(intList,new PersonComparator());
 	
 		System.out.println(minInteger);
 	}
 	
-	public static <T> T min(List<T> list,Comparator comparator){
+//	public static Object min(List list,Comparator comparator){
+//		Object lowest = list.get(0);
+//		for(Object temp:list){
+//			if(comparator.compare(temp, lowest) < 0){
+//				lowest = temp;
+//			}
+//		}
+//		return lowest;
+//	}
+	
+	public static <T> T min(List<T> list,Comparator<T> comparator){
 		T lowest = list.get(0);
 		for(T temp:list){
 			if(comparator.compare(temp, lowest) < 0){
